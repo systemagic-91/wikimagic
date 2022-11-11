@@ -10,7 +10,7 @@ Quando criamos testes é possível perceber o quão complexo ficou nosso código
 
 
 
-##### Funções
+##### Anotações
 
 * **Mock:** cria uma instancia de uma classe, porém Mockada. Se chamarmos um método ele não irá chamar o método real, a não ser que façamos isso. O comportamento padrão de um `@Mock` será sempre retornar nulo, ele é um objeto utilitário para verificações e simulação de retornos, exceções, entre outras coisas.
 * **Spy:** cria uma instancia de uma classe, que você pode mockar ou chamar os métodos reais. É uma alternativa ao `injectMocks`, quando é preciso mockar métodos da própria classe que está sendo testada.
@@ -28,7 +28,9 @@ Há duas formas de criar um mock usando mockito, por meio de um método estátic
 
 Estático: 
 
-`var ClientRepository = Mockito.mock(EmployeeRepository.class)`
+```java
+var ClientRepository = Mockito.mock(EmployeeRepository.class)
+```
 
 Anotação: 
 
@@ -39,9 +41,9 @@ private ClientRepository clientRepository;
 
 
 
-##### Configurando a classe testada
+##### Configurando a classe que será testada
 
-Ao declarar a classe vamos anotar ela com o `@InjectMocks`. O mockito vai criar uma instancia real dessa classe e injetar todos os objetos `@Mock` que foram declarados na classe de teste.
+Ao declarar a classe que será testada anotamos ela com o `@InjectMocks`. Assim o Mockito irá criar uma **instancia real** dessa classe e injetar todos os objetos `@Mock` que foram declarados na classe de teste:
 
 ```java
 @InjectMocks
@@ -54,14 +56,19 @@ private ClientController clientController;
 
 Para que essas anotações (`@Mock` e `@InjectMocks`) funcionem, é necessário habilita-las. Existem duas formas: 
 
-* anotando a classe de teste com `RunWhit(MockitoJUnitRunner.class)`
+* Anotando a **classe de teste** com `RunWhit(MockitoJUnitRunner.class)`.
 
 ```java
 @RunWith(MockitoJUnitRunner.class)
-public class ClientControllerTest{}
+public class ClientControllerTest{
+    
+    /**
+     * Implementação
+     */
+}
 ```
 
-* usando o `MockitoAnnotations.initMocks()` antes dos testes
+* Usando o `MockitoAnnotations.initMocks()` **antes dos testes**.
 
 ```java
 @Before
@@ -72,7 +79,7 @@ public void setup(){
 
 
 
-##### Testando um método void
+##### Testando um método do tipo `void`
 
 Método que será testado: 
 
@@ -97,7 +104,7 @@ Primeiro chamamos o método que vai ser testado e passamos os parâmetros necess
 
 Podemos verificar varias coisas com `Mockito.verify` numero de vezes que executou, parâmetros recebidos e etc.
 
-No exemplo abaixo, criamos um *mock()* de uma classe `CustomerRegister` para testar o comportamento do método `validateRealCpf` . Evidentemente, teremos um resultado positivo, independente do valor que for passado para ser validado. Isso ocorre porque eu utilizamos o `when()`.
+No exemplo abaixo, criamos um *mock()* de uma classe `CustomerRegister` para testar o comportamento do método `validateRealCpf` . Evidentemente, teremos um resultado positivo, independente do valor que for passado para ser validado. Isso ocorre porque utilizamos o `when()`.
 
 ```java
 @Test
@@ -123,7 +130,7 @@ public void shouldReturnFalseToInvalidateCpf() {
 
 ##### Spy Annotation
 
-Usamos o `@Spy` para espionar uma instância existente. No exemplo seguinte verificamos se os elementos adicionados na lista foram mesmo inseridos: 
+Usamos a anotação `@Spy` para espionar uma instância existente. No exemplo seguinte verificamos se os elementos adicionados na lista foram mesmo inseridos: 
 
 ```java
 @Test
@@ -153,7 +160,7 @@ public void spyTest(){
 
 
 
-Nesse exemplo, faremos um teste utilizando a função `Spy()/@Spy`, que possibilita *mockar* a classe que está sendo testada. Algo que não conseguimos fazer utilizando somente o `@InjectMocks`. Veja:
+Nesse exemplo, faremos outro teste utilizando a anotação `Spy()/@Spy`, que possibilita *mockar* a classe que está sendo testada. Algo que não conseguimos fazer utilizando somente o `@InjectMocks`. Veja:
 
 ```java
 @RunWith(MockitoJUnitRunner.class)
@@ -216,7 +223,7 @@ public void newClientTest(){
 
 Podemos usar o `mock()` em outros contextos pouco mais complexos, como para obter um resultado positivo do `repository.save()` independente do que este receba como parâmetro de entrada. 
 
-No exemplo abaixo utilizamos as anotações `@InjectMocks`, `@Mock` e `@Before` conforme codigo abaixo:
+No exemplo abaixo utilizamos as anotações `@InjectMocks`, `@Mock` e `@Before`:
 
 ```java
 @RunWith(MockitoJUnitRunner.class)
@@ -299,7 +306,7 @@ Se o seu teste precisar contar com o contêiner Spring Boot **e** você também 
 
 
 
-
+##### Referências
 
 https://stackoverflow.com/questions/44200720/difference-between-mock-mockbean-and-mockito-mock
 
