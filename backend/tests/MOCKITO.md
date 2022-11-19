@@ -130,7 +130,9 @@ public void shouldReturnFalseToInvalidateCpf() {
 
 ##### Spy Annotation
 
-Usamos a anotação `@Spy` para espionar uma instância existente. No exemplo seguinte verificamos se os elementos adicionados na lista foram mesmo inseridos: 
+A anotação `@Spy`  fará com que de fato **os métodos do objeto sejam invocados, diferente do `@Mock`  que apenas "finge" que chamou o método**. O @Spy você utiliza quando quer utilizar um objeto real, e precisa verificar se os métodos dele foram chamados.
+
+Então, a anotação `@Spy` para espionar uma instância existente. No exemplo seguinte verificamos se os elementos adicionados na lista foram mesmo inseridos: 
 
 ```java
 @Test
@@ -329,3 +331,5 @@ https://emmanuelneri.com.br/2017/03/18/teste-de-controllers-no-spring-boot/
 https://www.youtube.com/watch?v=A4Gp5du8wKE&ab_channel=Alex-JDevTreinamentoon-line
 
 https://www.youtube.com/watch?v=HRNUVbnkU7g&ab_channel=Jean
+
+https://www.baeldung.com/mockito-deprecated-mockitojunitrunner
