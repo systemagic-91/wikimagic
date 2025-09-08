@@ -2,7 +2,7 @@
 
 Um dos pontos mais importantes que precisamos entender é que quando estamos trabalhando com Docker são as imagens. O [docker hub](https://hub.docker.com/) é o *container registry* do Docker, basicamente é nele que ficam guardadas todas as imagens Docker que chamamos. 
 
-Ccomandos:
+Comandos:
 
 * `docker pull ubuntu`  - podemos baixar uma imagem do docker hub para o nosso registry local. 
 * `docker images`  - lista as imagens que temos na nossa máquina local.
@@ -49,4 +49,94 @@ COPY html /usr/share/nginx/html
 * `WORKDIR` - Diretorio em que vamos trabalhar dentro do container. Por exemplo, quando subirmos a imagem o docker vai criar a pasta no caminho especificado e começaremos o trabalho a partir dela.
 * `COPY <de onde> <para onde>` - Copiar um arquivo que está dentro do computador para dentro do container
 
-### ENTRYPOINT vs  CMD
+### ENTRYPOINT vs CMD
+
+* O **CMD** define o **comando padrão** que vai rodar quando o container for iniciado.
+* Ele **pode ser sobrescrito** facilmente quando você roda `docker run ...`.
+
+Exemplo:
+
+```dockerfile
+FROM ubuntu:latest
+CMD ["echo", "Hello World"]
+```
+
+Se buildarmos e rodarmos: 
+
+```bash
+docker build -t teste-cmd
+docker run teste-cmd
+```
+
+A saída será: 
+
+```bash
+Hello World
+```
+
+Mas se rodarmos: 
+
+```bash
+docker run teste-cmd echo "Outro comando"
+```
+
+Teremos como saída:
+
+```bash
+Outro comando
+```
+
+Ou seja `CMD` é só um padrão, vc pode trocar na hora de rodar o container.
+
+* O **ENTRYPOINT** define o **programa principal** do container.
+* Tudo o que você passar no `docker run ...` será tratado como **argumento para o ENTRYPOINT**.
+* É mais "fixo": não substitui fácil como o CMD.
+
+```dockerfile
+FROM ubuntu:latest
+ENTRYPOINT ["echo", "Hello"]
+CMD ["World"]
+```
+
+Se rodarmos: 
+
+```bash
+docker run teste-cmd echo "Charllote"
+```
+
+Teremos como saída:
+
+```bash
+Hello Charllote
+```
+
+### Publicando imagem  no DockerHub
+
+Se eu quiser que outra pessoa possa baixar e executar uma imagem no computador dela precisaremos pegar a imagem que foi criada e subir em algum local para que a pessoa tenha acesso. 
+
+```dockerfile
+FROM nginx:latest
+COPY html /usr/share/nginx/html
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+O *Dockerfile* descrito acima configura uma imagem do *nginx* com um arquivo `HTML`. Vamos preparar ela para o push:
+
+```bash
+docker build -t <usuarioDockerHub>/nginx-fullcycle .
+```
+
+Rodando imagem: 
+
+```bash
+docker run --rm -d -p 8080:80 <usuarioDockerHub>/nginx-fullcycle
+```
+
+Acessando o `dockerhub` no terminal e enviando a imagem:
+
+```bash
+docker login
+docker push <usuarioDockerHub>/nginx-fullcycle
+```
+
