@@ -1,10 +1,10 @@
 # Terraform
 
-É uma ferramenta open source, ela provisiona infraestrutura, ou sera, cria e configura recursos de infra de forma automatizada. Provisonar infra em grandes organizações é uma tarefa complexa pois em grandes empresas não temos apenas 1 ou 2 maquinas elas tem 10 mil maquinas, 100 mil maquinas, o que inviabiliza a configuração manual.
+É uma ferramenta open source, ela provisiona infraestrutura, ou seja, cria e configura recursos de infra de forma automatizada. Provisonar infra em grandes organizações é uma tarefa complexa pois em grandes empresas não temos apenas 1 ou 2 maquinas elas tem 10 mil maquinas, 100 mil maquinas, o que inviabiliza a configuração manual.
 
 > Provisionar infraestrutura = disponibilizar os recursos necessários para uma aplicação funcionar
 
-Sem o terraform teriamos que entrar no painel da AWS/Azure/GCP e criar cada coisa manualmente. COm o terraform, podemos descrever o que precisamos em arquivos `.tf`, e ele conversa com o provedor e cria os recursos necessários.
+Sem o terraform teriamos que entrar no painel da AWS/Azure/GCP e criar cada coisa manualmente. Com o terraform, podemos descrever o que precisamos em arquivos `.tf`, e ele conversa com o provedor e cria os recursos necessários.
 
 > **IaC** significa *Infrastructure as Code*. Em vez de configurar a infra manualmente, voce pode descrever a infraestrutura usando código. **IaC** é o conceito e Terraform é a ferramenta para aplicá-lo. 
 
@@ -18,7 +18,7 @@ A ideia de idempotencia no terraform aparece quando precisamos fazer alteraçõe
 crie o servidor chamado: server-01
 ```
 
-Nessa primeira execução o servidor é criado. Na segunda execução desse mesmo comando o terraform verifica que o servidor já existe e está exatamente como foi pedido então ele não cira outro servidor e o estado continua igual.
+Nessa primeira execução o servidor é criado. Na segunda execução desse mesmo comando o terraform verifica que o servidor já existe e está exatamente como foi pedido então ele não cria outro servidor e o estado continua igual.
 
 ### Terraform vs Ansible
 

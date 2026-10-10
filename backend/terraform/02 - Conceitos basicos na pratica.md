@@ -14,7 +14,7 @@ resource "aws_instance" "meu_servidor" {
 }
 ```
 
-No *plan* executamos o comando `terraform plan` e ele olha para o que foi escrito, olhá para o que já existe na infraestrutura, analisa o que precisa mudar, e mostra uma saida com a prévia do que será alterado: 
+No *plan* executamos o comando `terraform plan` e ele olha para o que foi escrito, olha para o que já existe na infraestrutura, analisa o que precisa mudar, e mostra uma saida com a prévia do que será alterado: 
 
 ```
 + servidor meu_servidor será criado
@@ -26,7 +26,7 @@ No *apply* executamos o comando `terraform apply`. Aqui e onde a ferramenta real
 
 ### Providers
 
-Apesar de o terraform ter seu proprio core e state, depende dos providers pra que ele consiga fazer as ações. Podemos pensar nele como alguém que sabe o que nós queremos fazer mas que não sabe diretamente **COMO** conversar com cada serviço. O **provider** é o tradutor entre o terraform e uma plataforma/serviço. 
+Apesar de o terraform ter seu proprio core e state, ele depende dos providers pra que ele consiga executar as ações. Podemos pensar no terraform como alguém que sabe o que queremos fazer mas que não sabe diretamente **COMO** conversar com cada serviço. O **provider** é o tradutor entre o terraform e uma plataforma/serviço. 
 
 > Terraform > Provider AWS > AWS
 >
@@ -36,7 +36,7 @@ O provider disponibiliza para o Terraform os recursos e APIs necessários para t
 
 > Os *providers* são os conectores que permitem ao Terraform conversar com diferentes tecnologias
 
-O registry do terraform nos mostra todos os providers e modulos com os quais podemos trabalhar. Ele é como um catálogo de providers e módulos. Nesse catálogo podemos encontrar informações como: 
+O `registry` do terraform nos mostra todos os providers e modulos com os quais podemos trabalhar. Ele é como um catálogo de providers e módulos. Nesse catálogo podemos encontrar informações como: 
 
 - Como instalar o provider
 - Qual é a versão mais recente
@@ -45,7 +45,7 @@ O registry do terraform nos mostra todos os providers e modulos com os quais pod
 - Exemplos de utilização 
 - Documentação
 
-O registry é especialmente útil porque não precisamos necessáriamente começar tudo do zero. Podemos usar *providers* oficiais e modulos reutilizáveis. 
+O `registry` é especialmente útil porque não precisamos necessáriamente começar tudo do zero. Podemos usar *providers* oficiais e modulos reutilizáveis. 
 
 > Modulos são como pacotes reutilizaveis de códito Terraform. Em vez de escrever manualmente dezenas de recursos para criar uma infra de rede, podemos utilizar um módulo que já faz isso.
 
@@ -65,7 +65,7 @@ resource "aws_instance" "servidor" {
 }
 ```
 
-Com `resource` estamos dizendo que estamos declarando um recurso. O `aws_instance` é o tipo do recurso da *AWS*. `servidor` é o nome que vamos dar ao recurso dentro do *terraform*, é um identificador ou alias. E `instace_type = "t2.micro"` é uma configuração do recurso declarado.
+Com `resource` estamos dizendo que estamos declarando um recurso. O `aws_instance` é o tipo do recurso da *AWS*. `Servidor` é o nome que vamos dar ao recurso dentro do *terraform*, é um identificador ou alias. E `instace_type = "t2.micro"` é uma configuração do recurso declarado.
 
 Então temos a seguinte estrutura:
 
@@ -106,7 +106,7 @@ Quando executamos esse comando o terraform compara tres coisas:
 2. O estado atual (state)
 3. A infraestrutura real
 
-Então ele calcula as diferençás e exibe o plano de ação: 
+Então ele calcula as diferenças e exibe o plano de ação: 
 
 ```
 + create
